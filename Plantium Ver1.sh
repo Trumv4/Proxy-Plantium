@@ -13,6 +13,11 @@ else
   yum install -y gcc make wget tar firewalld curl
 fi
 
+# === Bật đăng nhập SSH bằng mật khẩu ===
+sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+systemctl restart sshd
+
 # === Đổi mật khẩu root ===
 echo "root:Tubanvps1@" | chpasswd
 
